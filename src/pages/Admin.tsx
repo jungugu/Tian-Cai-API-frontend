@@ -9,8 +9,8 @@ const Admin: React.FC = () => {
   return (
     <PageContainer
       content={intl.formatMessage({
-        id: 'pages.admin.subPage.title',
-        defaultMessage: 'This page can only be viewed by admin',
+        id: 'pages.Admin.subPage.title',
+        defaultMessage: 'This page can only be viewed by Admin',
       })}
     >
       <Card>
@@ -28,7 +28,7 @@ const Admin: React.FC = () => {
           }}
         />
         <Typography.Title level={2} style={{ textAlign: 'center' }}>
-          <SmileTwoTone /> Ant Design Pro <HeartTwoTone twoToneColor="#eb2f96" /> You
+          <SmileTwoTone /> Tian Cai API <HeartTwoTone twoToneColor="#eb2f96" /> You
         </Typography.Title>
       </Card>
       <p style={{ textAlign: 'center', marginTop: 24 }}>

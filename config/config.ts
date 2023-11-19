@@ -1,4 +1,4 @@
-// https://umijs.org/config/
+  // https://umijs.org/config/
 import { defineConfig } from '@umijs/max';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
@@ -76,7 +76,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design Pro',
+  title: 'Tian Cai API',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -138,8 +138,8 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
-      // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      schemaPath: join(__dirname, 'oneapi.json'),
+      schemaPath: 'http://localhost:9101/api/v2/api-docs',
+      projectName: 'tianCaiAPI',
       mock: false,
     },
     {

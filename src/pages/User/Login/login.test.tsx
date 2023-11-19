@@ -40,14 +40,14 @@ describe('Login Page', () => {
       />,
     );
 
-    await rootContainer.findAllByText('Ant Design');
+    await rootContainer.findAllByText('Tian Cai API');
 
     act(() => {
       historyRef.current?.push('/user/login');
     });
 
     expect(rootContainer.baseElement?.querySelector('.ant-pro-form-login-desc')?.textContent).toBe(
-      'Ant Design is the most influential web design specification in Xihu district',
+      'Tian Cai API is the most influential web design specification in Xihu district',
     );
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
@@ -66,12 +66,12 @@ describe('Login Page', () => {
       />,
     );
 
-    await rootContainer.findAllByText('Ant Design');
+    await rootContainer.findAllByText('Tian Cai API');
 
-    const userNameInput = await rootContainer.findByPlaceholderText('Username: admin or user');
+    const userNameInput = await rootContainer.findByPlaceholderText('Username: Admin or user');
 
     act(() => {
-      fireEvent.change(userNameInput, { target: { value: 'admin' } });
+      fireEvent.change(userNameInput, { target: { value: 'Admin' } });
     });
 
     const passwordInput = await rootContainer.findByPlaceholderText('Password: ant.design');
@@ -85,7 +85,7 @@ describe('Login Page', () => {
     // 等待接口返回结果
     await waitTime(5000);
 
-    await rootContainer.findAllByText('Ant Design Pro');
+    await rootContainer.findAllByText('Tian Cai API');
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
