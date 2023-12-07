@@ -137,12 +137,42 @@ export async function publishInterfaceInfoUsingPOST(
   });
 }
 
+/** searchInterfaceInfoByPage POST /api/interfaceInfo/search/page */
+export async function searchInterfaceInfoByPageUsingPOST(
+  body: API.InterfaceSearchRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePageInterfaceInfo_>('/api/interfaceInfo/search/page', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** updateInterfaceInfo POST /api/interfaceInfo/update */
 export async function updateInterfaceInfoUsingPOST(
   body: API.InterfaceInfoUpdateRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/interfaceInfo/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** updateInterfaceAvatar POST /api/interfaceInfo/updateAvatar */
+export async function updateInterfaceAvatarUsingPOST(
+  body: API.UpdateInterfaceAvatarRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>('/api/interfaceInfo/updateAvatar', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

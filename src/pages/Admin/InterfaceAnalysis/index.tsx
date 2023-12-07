@@ -6,12 +6,24 @@ import '@umijs/max';
 import EChartsReact from "echarts-for-react";
 import {useState} from "react/index";
 import {useEffect} from "react";
-import {listTopInvokeInterfaceInfoUsingGET} from "@/services/tianCaiAPI/analysisInterfaceController";
+import {
+  listOrderInfoUsingGET,
+  listRegisterUserInWeekUsingGET,
+  listTopInvokeInterfaceInfoUsingGET
+} from "@/services/tianCaiAPI/analysisInterfaceController";
+import {Card, Col, Row} from "antd";
 
 
 const InterfaceAnalysis: React.FC = () => {
-  const [data,setdata] = useState<API.InterfaceInfoVO[]>([]);
+  const [data,setdata] = useState<API.InterfaceInfo[]>([]);
   const [loading,setloading] = useState(true);
+
+
+  const [dataUser,setdataUser] = useState<API.AnalysisUserRegisterVO[]>([]);
+  const [loadingUser,setloadingUser] = useState(true);
+
+  const [dataOrder,setdataOrder] = useState<API.AnalysisOrderVO[]>([]);
+  const [loadingOrder,setloadingOrder] = useState(true);
 
   useEffect(() => {
     try {
@@ -21,32 +33,78 @@ const InterfaceAnalysis: React.FC = () => {
           setloading(false);
         }
       })
+      listRegisterUserInWeekUsingGET().then(res => {
+        if (res.data) {
+          setdataUser(res.data);
+          setloadingUser(false);
+        }
+      })
+      listOrderInfoUsingGET().then(res => {
+        if (res.data) {
+          setdataOrder(res.data);
+          setloadingOrder(false);
+        }
+      })
     } catch (e: any) {
     }
   },[])
 
   const chartData = data.map(item => {
     return{
-      value: item.totalNum,
+      value: item.totalInvokes,
       name: item.name
+    }
+  })
+
+  const interfaceName = data.map(item => {
+    return{
+      value: item.name
+    }
+  })
+
+  const interfaceInvokeNum = data.map(item => {
+    return{
+      value: item.totalInvokes
+    }
+  })
+
+  const DataName = dataUser.map(item => {
+    return{
+      value: item.date,
+    }
+  })
+  const DataValue = dataUser.map(item => {
+    return{
+      value: item.registerUserNum,
+    }
+  })
+
+  const orderDataName = dataOrder.map(item => {
+    return{
+      value: item.date,
+    }
+  })
+  const orderDataValue = dataOrder.map(item => {
+    return{
+      value: item.total,
     }
   })
 
   const option = {
     title: {
-      text: '调用次数最多的接口TOP3',
+      text: '调用次数最多的接口TOP5',
       left: 'center'
     },
     tooltip: {
       trigger: 'item'
     },
     legend: {
-      top: '5%',
+      orient: 'vertical',
       left: 'left'
     },
     series: [
       {
-        name: 'Access From',
+        name: '调用次数',
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -73,10 +131,112 @@ const InterfaceAnalysis: React.FC = () => {
       }
     ]
   };
+
+  const optionUser = {
+    title: {
+      text: '近一周的用户注册',
+      left: 'center'
+    },
+    xAxis: {
+      type: 'category',
+      data: DataName,
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data:  DataValue,
+        type: 'line'
+      }
+    ]
+  };
+
+  const optionColumn = {
+    title: {
+      text: '接口调用次数',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'value',
+      boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+      type: 'category',
+      data: interfaceName,
+    },
+    series: [
+      {
+        name: '调用次数',
+        type: 'bar',
+        data: interfaceInvokeNum
+      },
+    ]
+  };
+
+
+  const optionOrder = {
+    title: {
+      text: '用户充值金额',
+      left: 'center'
+    },
+    xAxis: {
+      type: 'category',
+      data: orderDataName
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: orderDataValue,
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(180, 180, 180, 0.2)'
+        }
+      }
+    ]
+  };
   return (
-    <PageContainer>
-        <EChartsReact loadingOption={loading} option={option}/>
-    </PageContainer>
+    <Row gutter={[8, 8]}>
+      <Col span={12}>
+        <Card>
+          <EChartsReact loadingOption={loading} option={option}/>
+        </Card>
+      </Col>
+      <Col span={12}>
+        <Card>
+          <EChartsReact loadingOption={loadingUser} option={optionUser}/>
+        </Card>
+      </Col>
+      <Col span={12}>
+        <Card>
+          <EChartsReact loadingOption={loading} option={optionColumn}/>
+        </Card>
+      </Col>
+      <Col span={12} >
+        <Card>
+          <EChartsReact loadingOption={loadingOrder} option={optionOrder}/>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 export default InterfaceAnalysis;

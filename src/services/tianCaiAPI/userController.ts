@@ -29,6 +29,21 @@ export async function deleteUserUsingPOST(
   });
 }
 
+/** emailBandingHandle POST /api/user/emailBanding */
+export async function emailBandingHandleUsingPOST(
+  body: API.UserEmailBindingRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>('/api/user/emailBanding', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** getUserById GET /api/user/get */
 export async function getUserByIdUsingGET(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -59,6 +74,21 @@ export async function getUserVOByIdUsingGET(
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseUserVO_>('/api/user/get/vo', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** getCaptcha GET /api/user/getCaptcha */
+export async function getCaptchaUsingGET(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getCaptchaUsingGETParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>('/api/user/getCaptcha', {
     method: 'GET',
     params: {
       ...params,
@@ -112,17 +142,17 @@ export async function userLoginUsingPOST(
   });
 }
 
-/** userLoginByWxOpen GET /api/user/login/wx_open */
-export async function userLoginByWxOpenUsingGET(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.userLoginByWxOpenUsingGETParams,
+/** userLoginByEmail POST /api/user/loginByEmail */
+export async function userLoginByEmailUsingPOST(
+  body: API.UserLoginByEmailRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseLoginUserVO_>('/api/user/login/wx_open', {
-    method: 'GET',
-    params: {
-      ...params,
+  return request<API.BaseResponseLoginUserVO_>('/api/user/loginByEmail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    data: body,
     ...(options || {}),
   });
 }
@@ -137,7 +167,7 @@ export async function userLogoutUsingPOST(options?: { [key: string]: any }) {
 
 /** RandomSign GET /api/user/randomSign */
 export async function RandomSignUsingGET(options?: { [key: string]: any }) {
-  return request<API.BaseResponseUserSignVO_>('/api/user/randomSign', {
+  return request<API.BaseResponseLoginUserVO_>('/api/user/randomSign', {
     method: 'GET',
     ...(options || {}),
   });
@@ -149,6 +179,44 @@ export async function userRegisterUsingPOST(
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseLong_>('/api/user/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** userRegisterByEmail POST /api/user/registerByEmail */
+export async function userRegisterByEmailUsingPOST(
+  body: API.UserRegisterByEmailRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseLong_>('/api/user/registerByEmail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** doDailySignIn POST /api/user/signIn */
+export async function doDailySignInUsingPOST(options?: { [key: string]: any }) {
+  return request<API.BaseResponseBoolean_>('/api/user/signIn', {
+    method: 'POST',
+    ...(options || {}),
+  });
+}
+
+/** emailUnBandingHandle POST /api/user/unBanding */
+export async function emailUnBandingHandleUsingPOST(
+  body: API.UserEmailBindingRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>('/api/user/unBanding', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

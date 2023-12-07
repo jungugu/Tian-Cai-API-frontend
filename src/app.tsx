@@ -9,31 +9,35 @@ import { AvatarDropdown,AvatarName } from './components/RightContent/AvatarDropd
 import { errorConfig } from './requestErrorConfig';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
+const paths = ['/user/login', '/user/register']
+const whiteList = [loginPath, "/", "/account/center","/user/register","/interface/list","/interface_info/"]
+
 import Settings from '../config/defaultSettings';
+import {valueLength} from "@/pages/User/UserInfo";
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{currentUser?: API.LoginUserVO;}> {
+  const { location } = history;
   const fetchUserInfo = async () => {
     try {
       const res = await getLoginUserUsingGET();
       return res.data;
     } catch (error) {
-      history.push(loginPath);
+      if (!whiteList.includes(location.pathname)) {
+        history.push(loginPath);
+      }
     }
     return undefined;
   };
   // 如果不是登录页面，执行
-  const { location } = history;
-  if (location.pathname !== loginPath) {
+  if (!paths.includes(location.pathname)) {
     const currentUser = await fetchUserInfo();
     return {
       currentUser,
-
     };
   }
-
   return {};
 }
 
@@ -42,10 +46,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   return {
     actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     avatarProps: {
-      src: initialState?.currentUser?.userAvatar,
-      title: <AvatarName />,
+      src: valueLength(initialState?.currentUser?.userAvatar) ? initialState?.currentUser?.userAvatar :
+        "https://img.qimuu.icu/typory/notLogin.png",
+      title: initialState?.currentUser ? <AvatarName/> : "游客",
       render: (_, avatarChildren) => {
-        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
+        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>
       },
     },
     waterMarkProps: {
@@ -55,7 +60,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      if (!initialState?.currentUser && !/^\/\w+\/?$/.test(location.pathname) && location.pathname !== '/'
+        && location.pathname !== '/interface/list' && !location.pathname.includes("/interface_info/")) {
         history.push(loginPath);
       }
     },
@@ -120,7 +126,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const request = {
-  baseURL: 'http://localhost:9101',
+  baseURL: 'http://localhost:8101',
   withCredentials: true,
   ...errorConfig,
 };

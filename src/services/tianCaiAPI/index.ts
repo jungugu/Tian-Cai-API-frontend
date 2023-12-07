@@ -8,6 +8,8 @@ import * as interfaceInfoController from './interfaceInfoController';
 import * as postController from './postController';
 import * as postFavourController from './postFavourController';
 import * as postThumbController from './postThumbController';
+import * as productInfoController from './productInfoController';
+import * as productOrderController from './productOrderController';
 import * as userController from './userController';
 import * as userInterfaceInfoController from './userInterfaceInfoController';
 import * as wxMpController from './wxMpController';
@@ -19,6 +21,8 @@ export default {
   postController,
   postFavourController,
   postThumbController,
+  productInfoController,
+  productOrderController,
   userController,
   userInterfaceInfoController,
 };
