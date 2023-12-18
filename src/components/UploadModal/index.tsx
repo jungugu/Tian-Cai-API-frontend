@@ -94,7 +94,7 @@ const UploadModal: React.FC<Props> = (props) => {
   const prop: UploadProps = {
     name: 'file',
     withCredentials: true,
-    action: `http://localhost:9101/api/file/upload?biz=interface_avatar`,
+    action: `http://localhost:8101/api/file/upload?biz=interface_avatar`,
     onChange: async ({file, fileList: newFileList}) => {
       const {response} = file;
       if (file.response && response.data) {

@@ -1,6 +1,6 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
-import { Card, theme } from 'antd';
+import {Card, Col, Row, theme} from 'antd';
 import React from 'react';
 
 /**
@@ -120,35 +120,31 @@ const Welcome: React.FC = () => {
               width: '65%',
             }}
           >
-            Tian Cai API 是一个整合了 umi，Tian Cai API 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            Tian Cai API 开放平台是一个多功能、可定制化的接口平台，为开发者、企业和个人提供全方位的技术支持和服务。无论您是想将您的产品整合到我们的平台上，还是利用我们的API构建自己的应用程序，都能轻松实现。
           </p>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 16,
-            }}
-          >
-            <InfoCard
-              index={1}
-              href="https://umijs.org/docs/introduce/introduce"
-              title="了解 umi"
-              desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-            />
-            <InfoCard
-              index={2}
-              title="了解 tian cai API"
-              href="https://ant.design"
-              desc="antd 是基于 Tian Cai API 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
-            />
-            <InfoCard
-              index={3}
-              title="了解 Pro Components"
-              href="https://procomponents.ant.design"
-              desc="ProComponents 是一个基于 Tian Cai API 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
-            />
-          </div>
+          <Row gutter={[16, 16]}>
+            <Col span={12} >
+              <Card title="SDK🔔️">
+                为了方便开发者集成接口到自己的代码中，平台提供了客户端SDK，使调用接口变得更加简单和便捷
+              </Card>
+            </Col>
+            <Col span={12} >
+              <Card title="简洁高效🔔️">
+                稳定、安全、高效的接口调用服务，帮助您实现更快速、便捷的开发和调用体验
+              </Card>
+            </Col>
+
+            <Col span={12} >
+              <Card title="开发者文档和技术支持🔔️">
+                平台提供了详细的开发者文档和技术支持，帮助开发者快速接入和发布接口，解决遇到的问题和困难
+              </Card>
+            </Col>
+            <Col span={12} >
+              <Card title="在线调试功能🔔️">
+                您可以在平台上进行接口在线调试，快速验证接口的功能和效果，节省了开发调试的时间和工作量
+              </Card>
+            </Col>
+          </Row>
         </div>
       </Card>
     </PageContainer>

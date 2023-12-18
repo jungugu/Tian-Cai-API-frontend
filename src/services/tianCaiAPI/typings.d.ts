@@ -309,18 +309,19 @@ declare namespace API {
   };
 
   type InterfaceInfoUpdateRequest = {
+    avatarUrl?: string;
     description?: string;
     id?: number;
-    interfaceAvatar?: string;
     method?: string;
     name?: string;
     reduceScore?: number;
     requestExample?: string;
     requestHeader?: string;
-    requestParams?: string;
+    requestParams?: RequestParamsField[];
     responseHeader?: string;
-    responseParams?: string;
+    responseParams?: ResponseParamsField[];
     returnFormat?: string;
+    status?: number;
     url?: string;
   };
 

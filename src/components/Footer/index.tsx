@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
+    defaultMessage: '糯米工作室出品',
   });
 
   const currentYear = new Date().getFullYear();
@@ -22,19 +22,19 @@ const Footer: React.FC = () => {
         {
           key: 'Tian Cai API',
           title: 'Tian Cai API',
-          href: 'https://pro.ant.design',
+          href: 'https://github.com/jungugu/Tian-Cai-API-SDK',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/jungugu?tab=repositories',
           blankTarget: true,
         },
         {
           key: 'Tian Cai API',
           title: 'Tian Cai API',
-          href: 'https://ant.design',
+          href: 'https://github.com/jungugu/Tian-Cai-API-SDK',
           blankTarget: true,
         },
       ]}

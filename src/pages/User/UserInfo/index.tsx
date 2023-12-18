@@ -387,7 +387,7 @@ const UserInfo: React.FC = () => {
               const res = await getLoginUserUsingGET();
               if (res.data && res.code === 0) {
                 message.success("签到成功")
-                setInitialState({currenntUser: res.data})
+                setInitialState({currentUser: res.data})
               }
             }
             setTimeout(() => {
@@ -439,7 +439,7 @@ const UserInfo: React.FC = () => {
           bordered
         >
           <Button size={"large"}>
-            <a target={"_blank"} href={"https://github.com/qimu666/qi-api-sdk"}
+            <a target={"_blank"} href={"https://github.com/jungugu/Tian-Cai-API-SDK"}
                rel="noreferrer"><VerticalAlignBottomOutlined/> Java SDK</a>
           </Button>
         </ProCard>
